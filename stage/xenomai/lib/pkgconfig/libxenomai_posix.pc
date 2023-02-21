@@ -1,0 +1,13 @@
+prefix=/usr/xenomai
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+XENO_BASE_CFLAGS=-I${includedir} -D_GNU_SOURCE -D_REENTRANT -D__XENO__
+XENO_POSIX_WRAPPERS=${pc_sysrootdir}${libdir}/posix.wrappers
+XENO_POSIX_LDFLAGS=-L${libdir} -lpthread_rt -lxenomai -lpthread -lrt 
+
+Name: xenomai
+Description: Xenomai posix skin library
+Version: 2.6.5
+Libs: -Wl,@${XENO_POSIX_WRAPPERS} ${XENO_POSIX_LDFLAGS}
+Cflags: ${XENO_BASE_CFLAGS} -I${includedir}/posix

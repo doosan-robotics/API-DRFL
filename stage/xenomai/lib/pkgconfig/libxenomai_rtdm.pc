@@ -1,0 +1,13 @@
+prefix=/usr/xenomai
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+skin=rtdm
+XENO_BASE_CFLAGS=-I${includedir} -D_GNU_SOURCE -D_REENTRANT -D__XENO__
+XENO_BASE_LDFLAGS=-L${libdir} -lxenomai -lpthread -lrt 
+
+Name: xenomai
+Description: Xenomai RTDM skin library
+Version: 2.6.5
+Libs: -l${skin} ${XENO_BASE_LDFLAGS}
+Cflags: ${XENO_BASE_CFLAGS}
