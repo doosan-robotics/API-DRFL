@@ -3,26 +3,8 @@
     =                   Copyright (c) Doosan Robotics.                        =   
     =_______________________________________________________________________  =
     = Title             : Doosan Robot Framwork Library                       =
-    = Author            : Lee Jeong-Woo<jeongwoo1.lee@doosan.com> / Gong Jin-Hyuk<jinhyuk.gong@doosan.com> =
+    = Author            : Lee Jeong-Woo<jeongwoo1.lee@doosan.com>             =
     = Description       : -                                                   =
-    = Version           : 1.0 (GL010105) first release                        =
-    =                     1.11 (GL010105-beta) add force control              =
-    =                                    add coordinate sytem control function      =
-    =                                    fix GetCurrentTool, GetCurrentTCP function = 
-    =                     1.12 (GL010106) add monitoring data extension       =
-    =                                    add debug message                    = 
-    =                                    support over 2.5 version (parameter) =
-    =                     1.13 (GL010107) add flange_serial                   = 
-    =                                    (open, close, read, write)           =
-    =                                    add move_home(user)                  =
-    =                                    add set_user_home                    =
-    =                                    fix SWRPT-4715(recovery mode)        =
-    =                                    fix SWRPT-4697(Resolving version compatibility issues)
-    =                     1.14 (GL010108) fix TOnDisconnectedCB(reconnection) =
-    =                                    fix movesj, amovesj                  =
-    =                     1.15 (GL010109) add flange_serial_read (add timeout param)
-    =                                    fix set_user_home / move_home        =
-    =                                    fix flaneg_serial_open(baudrate param)
     ======================================================================== */
 
 /*********************************************************************
@@ -91,19 +73,7 @@ namespace DRAFramework
     typedef void (*TOnMonitoringSpeedModeCB)(const MONITORING_SPEED);
     typedef void (*TOnMasteringNeedCB)();
     typedef void (*TOnDisconnectedCB)();
-	typedef void (*TOnTcpServerMessageReceivedCB)(const char* strUniqueID, const int nClientID, const char* pData);
-    typedef void (*TOnTcpClientMessageReceivedCB)(const char* strUniqueID, const char* pData);
-    typedef void (*TOnTcpServerNotifyNewConnectCB)(const char* strUniqueID, const int nClientID);
-    typedef void (*TOnTcpServerNotifyDisconnectCB)(const char* strUniqueID, const int nClientID);
-    typedef void (*TOnTcpClientNotifyNewConnectCB)(const char* strUniqueID);
-    typedef void (*TOnTcpClientNotifyDisconnectCB)(const char* strUniqueID);
-    typedef void (*TOnTcpClientNotifyReconnectCB)(const char* strUniqueID);
-    typedef void (*TOnOpenConnectResultCB)(const char* strUniqueID, bool bResult);
-    typedef void (*TOnCloseConnectResultCB)(const char* strUniqueID, bool bResult);
-    typedef void (*TOnTcpClientDisconnectCB)(const char* strUniqueID);
-	typedef void (*TOnConnectionLostTcpCB)();
-    typedef void (*TOnSerialDataUpdatedCB)(char*);
-    typedef void (*TOnSerialConnectionStatusUpdatedCB)(char*);
+
 
     typedef void (*TOnRTMonitoringDataCB)(const LPRT_OUTPUT_DATA_LIST);
     
@@ -189,18 +159,6 @@ namespace DRAFramework
         DRFL_API void _SetOnTpInitializingCompleted(LPROBOTCONTROL pCtrl, TOnTpInitializingCompletedCB pCallbackFunc);
         DRFL_API void _SetOnMasteringNeed(LPROBOTCONTROL pCtrl, TOnMasteringNeedCB pCallbackFunc);
         DRFL_API void _SetOnDisconnected(LPROBOTCONTROL pCtrl, TOnDisconnectedCB pCallbackFunc);
-        DRFL_API void _SetOnTcpServerMessageReceived(LPROBOTCONTROL pCtrl, TOnTcpServerMessageReceivedCB pCallbackFunc);
-        DRFL_API void _SetOnTcpClientMessageReceived(LPROBOTCONTROL pCtrl, TOnTcpClientMessageReceivedCB pCallbackFunc);
-        DRFL_API void _SetOnServerNotifyNewConnect(LPROBOTCONTROL pCtrl, TOnTcpServerNotifyNewConnectCB pCallbackFunc);
-        DRFL_API void _SetOnServerNotifyDisconnect(LPROBOTCONTROL pCtrl, TOnTcpServerNotifyDisconnectCB pCallbackFunc);
-        DRFL_API void _SetOnClientNotifyNewConnect(LPROBOTCONTROL pCtrl, TOnTcpClientNotifyNewConnectCB pCallbackFunc);
-        DRFL_API void _SetOnClientNotifyDisconnect(LPROBOTCONTROL pCtrl, TOnTcpClientNotifyDisconnectCB pCallbackFunc);
-        DRFL_API void _SetOnClientNotifyReconnect(LPROBOTCONTROL pCtrl, TOnTcpClientNotifyReconnectCB pCallbackFunc);
-        DRFL_API void _SetOnOpenConnectResult(LPROBOTCONTROL pCtrl, TOnOpenConnectResultCB pCallbackFunc);
-        DRFL_API void _SetOnCloseConnectResult(LPROBOTCONTROL pCtrl, TOnCloseConnectResultCB pCallbackFunc);
-        DRFL_API void _SetOnTcpClientDisconnect(LPROBOTCONTROL pCtrl, TOnTcpClientDisconnectCB pCallbackFunc);
-        DRFL_API void _SetOnSerialDataUpdated(LPROBOTCONTROL pCtrl, TOnSerialDataUpdatedCB pCallbackFunc);
-        DRFL_API void _SetOnSerialConnectionStatusUpdated(LPROBOTCONTROL pCtrl, TOnSerialConnectionStatusUpdatedCB pCallbackFunc);
         
         ////////////////////////////////////////////////////////////////////////////
         //  motion Operations                                                     //
@@ -321,7 +279,6 @@ namespace DRAFramework
         void PrintFParam(float* printArr, int iSize, string strFunc);
         void PrintUCParam(unsigned char* printArr, int iSize, string strFunc);
         bool CheckNewFlange();
-        ROBOT_SYSTEM_MODEL GetRobotModel();
 
 #ifdef __cplusplus
     };

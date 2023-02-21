@@ -5,10 +5,6 @@
     = Title             : Doosan Robot Framwork Structure                     =
     = Author            : Lee Jeong-Woo<jeongwoo1.lee@doosan.com>             =
     = Description       : -                                                   =
-    = Version           : 1.0 (GL010105) first release                        =
-    =                     1.1 (GF020300) add force control                    =
-    =                                    add coordinate sytem control function      =
-    =                                    fix GetCurrentTool, GetCurrentTCP function = 
     ======================================================================== */
 
 /*********************************************************************
@@ -51,7 +47,6 @@
 #ifdef __cplusplus
 #include <string>
 #include <list>
-#include <stdint.h>
 using namespace std;
 #endif
 
@@ -1180,8 +1175,8 @@ typedef struct _MODBUS_DATA_LIST
 
 typedef struct _CONFIG_WORLD_COORDINATE
 {
-    /* ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½: world2base: 0, base2ref: 1, world2ref: 2 */
-    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½Ì¼ï¿½ï¿½ï¿½: 0, ï¿½ï¿½ï¿½ï¿½: 1*/
+    /* ¼³Á¤Å¸ÀÔ: world2base: 0, base2ref: 1, world2ref: 2 */
+    /* ¼³Á¤¿©ºÎ: ¹Ì¼³Á¤: 0, ¼³Á¤: 1*/
     unsigned char               _iType;
     /* target pose */
     float                       _fPosition[NUMBER_OF_JOINT];
@@ -1877,7 +1872,7 @@ typedef struct _CONVEYOR_COORD_EX
     int                _iDistance2Count;
     /* converyor coordination */
     POSITION            _tPosConCoord;
-    /*Base ï¿½ï¿½Ç¥: 0, World ï¿½ï¿½Ç¥: 2 */
+    /*Base ÁÂÇ¥: 0, World ÁÂÇ¥: 2 */
     unsigned char       _iTargetRef;
 } CONVEYOR_COORD_EX, *LPCONVEYOR_COORD_EX;
 
@@ -2032,17 +2027,17 @@ typedef struct _CONFIG_WELD_SETTING
     struct {
         /* ratio start */
         float                   _fRs;
-        /* ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* º¸È£°¡½º¹æÃâ½Ã°£ */
         float                   _fTss;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* ½ÃÀÛÀü·ù½Ã°£ */
         float                   _fTas;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* ¿ëÁ¢Á¶°Çº¯°æ½Ã°£ */
         float                   _fTwc;
         /* ratio finish */
         float                   _fRf;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* Á¾·áÀü·ù½Ã°£ */
         float                   _fTaf;
-        /* ï¿½ï¿½ï¿½áº¸È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* Á¾·áº¸È£°¡½º¹æÃâ½Ã°£ */
         float                   _fTsf;
     } _tDetail;
 } CONFIG_WELD_SETTING, *LPCONFIG_WELD_SETTING;
@@ -2220,21 +2215,21 @@ typedef struct _CONFIG_ANALOG_WELDING_SETTING
     {
         /* ratio start */
         float                   _fRs;
-        /* ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* º¸È£°¡½º¹æÃâ½Ã°£ */
         float                   _fTss;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* ½ÃÀÛÀü·ù½Ã°£ */
         float                   _fTas;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* ¿ëÁ¢Á¶°Çº¯°æ½Ã°£ */
         float                   _fTwc;
         /* ratio finish */
         float                   _fRf;
-        /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* Á¾·áÀü·ù½Ã°£ */
         float                   _fTaf;
-        /* ï¿½ï¿½ï¿½áº¸È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ */
+        /* Á¾·áº¸È£°¡½º¹æÃâ½Ã°£ */
         float                   _fTsf;
-        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+        /* ½ÃÀÛ Àü¾Ð Á¶°Ç */
         float                   _fStartVoltage;
-        /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+        /* Á¾·á Àü¾Ð Á¶°Ç */
         float                   _fEndVoltage;
     } _tDetail;
     float                       _fTargetFeedingSpeed;
@@ -2763,7 +2758,7 @@ typedef struct _USER_COORD_EXTERNAL_FORCE_INFO
 
 typedef struct _MEASURE_FRICTION_RESPONSE
 {
-    /* measure result : 0(ï¿½ï¿½ï¿½ï¿½), 1(ï¿½ï¿½ï¿½ï¿½) */
+    /* measure result : 0(½ÇÆÐ), 1(¼º°ø) */
     unsigned char               _iResult[NUMBER_OF_JOINT];
     /* measrue error (N/m) */
     float                       _fError[NUMBER_OF_JOINT];
@@ -2807,7 +2802,7 @@ typedef struct _POSITION_ADDTO
 
 typedef struct _MEASURE_FRICTION
 {
-    /* measure type : 0(Ã¼Å©ï¿½ï¿½ï¿½), 1(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) */
+    /* measure type : 0(Ã¼Å©¸ð¼Ç), 1(ÃøÁ¤¸ð¼Ç) */
     unsigned char               _iType;
     /* select joint */
     unsigned char               _iSelect[NUMBER_OF_JOINT];
@@ -3254,50 +3249,5 @@ typedef struct _SAFETY_CONFIGURATION_EX
 
 } SAFETY_CONFIGURATION_EX, *LPSAFETY_CONFIGURATION_EX;
 
-typedef struct _USER_TCP
-{
-	EN_USER_MODULE_TYPE enType;
-    unsigned int nPort;
-    unsigned int nTimeOut;
-    unsigned int nClientConnectedNumber; //if type == SERVER, nClientConnectedNumber is number of client left can connect //max is 10
-    unsigned int pidProcessID;
-    unsigned int nClientID[10];
-    char strIPAddress[16];
-    char strUniqueID[255];	//this is unique name
-} USER_TCP, *LPUSER_TCP;
 
-typedef struct _USER_TCP_CLIENT
-{
-	int ID;
-	int nPort;
-    char strIPAddress[16];
-} USER_TCP_CLIENT, *LPUSER_TCP_CLIENT;
-
-typedef struct _SERIAL_CONFIG
-{
-    char* chPort;
-    char* serialName;
-    unsigned int baudrate;
-    parity_t parity;
-    bytesize_t byteSize;
-    stopbits_t stopBits;
-    unsigned int timeout;
-    char* uniqueID;
-} SERIAL_CONFIG, *LPSERIAL_CONFIG;
-
-typedef struct _USER_SERIAL_INFO
-{
-	char status;			// OPENED (1) and NOT OPENED (0)
-	char chPort[32];
-    unsigned int baudrate;
-    unsigned int parity;
-    unsigned int byteSize;
-    unsigned int stopBits;
-    unsigned int timeout;
-} USER_SERIAL_INFO, *LPUSER_SERIAL_INFO;
-
-typedef struct _USER_SERIAL_NOTIFY
-{
-    uint32_t serialStatus;
-} USER_SERIAL_NOTIFY, *LPUSER_SERIAL_NOTIFY;
 #pragma pack()

@@ -5,10 +5,6 @@
     = Title             : Doosan Robot Framwork Constant                      =
     = Author            : Lee Jeong-Woo<jeongwoo1.lee@doosan.com>             =
     = Description       : -                                                   =
-    = Version           : 1.0 (GL010105) first release                        =
-    =                     1.1 (GF020300) add force control                    =
-    =                                    add coordinate sytem control function      =
-    =                                    fix GetCurrentTool, GetCurrentTCP function = 
     ======================================================================== */
 
 /*********************************************************************
@@ -46,8 +42,6 @@
  *********************************************************************/
 
 #pragma once
-
-#define _IS_PLATFORM
 
 #ifndef TRUE
 #define TRUE  1
@@ -113,7 +107,8 @@
 
 #define MAX_USER_COORD_MONITORING_EXT_FORCE_SIZE  10
 #define MAX_MODBUS_SLAVE_DEVICES        5
-#define MAX_MODBUS_REGISTER_PER_DEVICE  100
+//#define MAX_MODBUS_REGISTER_PER_DEVICE  100
+#define MAX_MODBUS_REGISTER_PER_DEVICE  50
 #define MAX_MODBUS_SLAVE_TOTAL_GPR      128
 
 #define NUM_REMOTE_CONTROL 8
@@ -621,56 +616,6 @@ typedef enum {
 
 } SAFETY_MODE;
 
-//
-// safety state enumerated value
-//
-typedef enum {
-    EN_USER_NONE,
-    EN_USER_TCP_SERVER,
-    EN_USER_TCP_CLIENT,
-    EN_USER_SERIAL
-}EN_USER_MODULE_TYPE;
-
-typedef enum {
-  parity_none = 0,
-  parity_odd = 1,
-  parity_even = 2,
-  parity_mark = 3,
-  parity_space = 4
-} parity_t;
-
-typedef enum {
-  stopbits_one = 1,
-  stopbits_two = 2,
-  stopbits_one_point_five
-} stopbits_t;
-
-typedef enum {
-  fivebits = 5,
-  sixbits = 6,
-  sevenbits = 7,
-  eightbits = 8
-} bytesize_t;
-
-// enum for module manager response
-typedef enum _MODULE_MANAGER_STATUS {
-    MM_SUCCESS=0,
-    MM_INIT_FAIL,
-    MM_INSTALL_FAIL,
-    MM_LOAD_FAIL,
-    MM_UNLOAD_FAIL,
-    MM_FORCE_UNLOAD,
-    MM_DELETE_FAIL,
-    MM_REQUEST_INVALID,
-    MM_UNKOWN_SUB_COMMAND,
-} MODULE_MANAGER_STATUS, *LPMODULE_MANAGER_STATUS;
-
- typedef enum
-{
-    STATUS_SERIAL_OPEN = 0,
-    STATUS_SERIAL_WRITE,
-    STATUS_SERIAL_CLOSE,
-} EN_USER_SERIAL_STATUS;
 //
 // safety state enumerated value
 //
@@ -1339,16 +1284,3 @@ enum {
     OPERATION_DETECT_CPU_RESERVED9                        = 7248,
 };
 
-typedef enum {
-    ROBOT_SYSTEM_MODEL_M0609,
-    ROBOT_SYSTEM_MODEL_M0617,
-    ROBOT_SYSTEM_MODEL_M1013,
-    ROBOT_SYSTEM_MODEL_M1509,
-    ROBOT_SYSTEM_MODEL_A0509,
-    ROBOT_SYSTEM_MODEL_A0509S,
-    ROBOT_SYSTEM_MODEL_A0912,
-    ROBOT_SYSTEM_MODEL_A0912S,
-    ROBOT_SYSTEM_MODEL_H2017,
-    ROBOT_SYSTEM_MODEL_H2515,
-    ROBOT_SYSTEM_MODEL_UNKNOWN
-} ROBOT_SYSTEM_MODEL;
