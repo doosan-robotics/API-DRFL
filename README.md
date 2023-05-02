@@ -35,6 +35,7 @@ The link below is a link to the solution file for using the windows example.
 2.	If main.o is created normally, enter the command below to create an example file
 
 `$ g++ -o drfl_tets main.o ../../library/Linux/64bits/20.04/libDRFL.a /usr/lib/libPocoFoundation.so /usr/lib/libPocoNet.so`
+
 3.	Check the build. When the build is complete, test the actual controller and connection.
 
 > The Poco library can be downloaded with the command below.
