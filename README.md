@@ -3,7 +3,7 @@
 This document describes the Windows/Linux build method of DRFL (Doosan Robotics Framework Library).
 The manual can be found at the link below.
 
-[Manual](https://manual.doosanrobotics.com/help/api/latest/publish/en_us/api-manual-36471062.html)
+[Manual](https://manual.doosanrobotics.com/en/api/1.28/Publish/)
 
 ## Environment
 
