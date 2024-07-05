@@ -3,7 +3,7 @@
 This document describes the Windows/Linux build method of DRFL (Doosan Robotics Framework Library).
 The manual can be found at the link below.
 
-[Manual](https://manual.doosanrobotics.com/en/api/1.28/Publish/)
+[Manual](https://manual.doosanrobotics.com/en/api/1.29/Publish/)
 
 ## Environment
 
@@ -34,9 +34,10 @@ The link below is a link to the solution file for using the windows example.
 `$ g++ -c main.cpp`
 2.	If main.o is created normally, enter the command below to create an example file
 
-`$ g++ -o drfl_tets main.o ../../library/Linux/64bits/20.04/libDRFL.a /usr/lib/libPocoFoundation.so /usr/lib/libPocoNet.so`
+`$ g++ -o drfl_test main.o ../../library/Linux/64bits/20.04/libDRFL.a /usr/lib/x86_64-linux-gnu/libPocoFoundation.so /usr/lib/x86_64-linux-gnu/libPocoNet.so`
 
 3.	Check the build. When the build is complete, test the actual controller and connection.
 
 > The Poco library can be downloaded with the command below.
 > **$ sudo apt-get install libpoco-dev**
+
