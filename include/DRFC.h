@@ -66,6 +66,7 @@
 #define NUM_BUTTON               (5)
 #define NUM_BUTTON_EX            (6)
 #define NUMBER_OF_TASK           (6)
+#define NUMBER_OF_ITER_THRESHOULD           (2)
 
 //
 // string constants
@@ -290,6 +291,34 @@ typedef enum {
 } MOVE_MODE;
 
 //
+// movec orientation value
+//
+typedef enum {
+    DR_MV_ORI_TEACH,
+    DR_MV_ORI_FIXED,
+    DR_MV_ORI_RADIAL,
+    DR_MV_ORI_INTENT,
+} MOVE_ORIENTATION;
+
+//
+// spiral_dir value : inward / outward
+//
+typedef enum {
+    DR_SPIRAL_OUTWARD,
+    DR_SPIRAL_INWARD,
+} SPIRAL_DIR;
+
+//
+// rot_dir value : FORWARD / REVERSE
+//
+typedef enum {
+    DR_ROT_FORWARD,
+    DR_ROT_REVERSE,
+} ROT_DIR;
+
+//
+
+//
 // alter motion path mode enumerated value
 //
 typedef enum {
@@ -325,6 +354,14 @@ typedef enum {
     BLENDING_SPEED_TYPE_OVERRIDE,
 
 } BLENDING_SPEED_TYPE;
+
+//
+// servoj type enumerated value
+//
+typedef enum {
+    DR_SERVO_OVERRIDE = 0,
+    DR_SERVO_QUEUE = 1,
+} DR_SERVOJ_TYPE;
 
 //
 // reset safety stop type enumerated value

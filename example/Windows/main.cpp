@@ -1,4 +1,4 @@
-// DRFTWin32.cpp : ÄÜ¼Ö ÀÀ¿ë ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÁøÀÔÁ¡À» Á¤ÀÇÇÕ´Ï´Ù.
+
 //
 
 #include <Windows.h>
@@ -23,89 +23,89 @@ while loop < 1003:\r\n\
  movej(posj(10,10.10,10,10.10), vel=60, acc=60)\r\n\
  movej(posj(00,00.00,00,00.00), vel=60, acc=60)\r\n\
  loop+=1\r\n";
-DWORD WINAPI ThreadFunc(void *arg);
+DWORD WINAPI ThreadFunc(void* arg);
 
 bool bAlterFlag = FALSE;
 int mCnt = 0;
 
 void OnTpInitializingCompleted()
 {
-    // Tp ÃÊ±âÈ­ ÀÌÈÄ Á¦¾î±Ç ¿äÃ».
+    // Tp ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã».
     g_TpInitailizingComplted = TRUE;
     Drfl.ManageAccessControl(MANAGE_ACCESS_CONTROL_FORCE_REQUEST);
 }
 
 void OnHommingCompleted()
 {
-    // 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í.
-    cout << "homming completed" << endl;
+    // 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+   std::cout << "homming completed" << std::endl;
 }
 
 void OnProgramStopped(const PROGRAM_STOP_CAUSE)
 {
     assert(Drfl.PlayDrlStop(STOP_TYPE_SLOW));
-    // 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í.
+    // 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
     //assert(Drfl.SetRobotMode(ROBOT_MODE_MANUAL));
-    cout << "program stopped" << endl;
+   std::cout << "program stopped" << std::endl;
 }
 
 void OnMonitoringDataCB(const LPMONITORING_DATA pData)
 {
-    // 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í.
+    // 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 
     return;
-    cout << "# monitoring 0 data "
+   std::cout << "# monitoring 0 data "
         << pData->_tCtrl._tTask._fActualPos[0][0]
         << pData->_tCtrl._tTask._fActualPos[0][1]
         << pData->_tCtrl._tTask._fActualPos[0][2]
         << pData->_tCtrl._tTask._fActualPos[0][3]
         << pData->_tCtrl._tTask._fActualPos[0][4]
-        << pData->_tCtrl._tTask._fActualPos[0][5] << endl;
+        << pData->_tCtrl._tTask._fActualPos[0][5] << std::endl;
 }
 
 void OnMonitoringDataExCB(const LPMONITORING_DATA_EX pData)
 {
     return;
-    cout << "# monitoring 1 data "
+   std::cout << "# monitoring 1 data "
         << pData->_tCtrl._tJoint._fActualPos[1]
         << pData->_tCtrl._tJoint._fActualPos[1]
         << pData->_tCtrl._tJoint._fActualPos[2]
         << pData->_tCtrl._tJoint._fActualPos[3]
         << pData->_tCtrl._tJoint._fActualPos[4]
-        << pData->_tCtrl._tJoint._fActualPos[5] << endl;
+        << pData->_tCtrl._tJoint._fActualPos[5] << std::endl;
 }
 
 void OnMonitoringCtrlIOCB(const LPMONITORING_CTRLIO pData)
 {
     return;
-    cout << "# monitoring ctrl 0 data" << endl;
-    for (int i = 0; i<16; i++)
+   std::cout << "# monitoring ctrl 0 data" << std::endl;
+    for (int i = 0; i < 16; i++)
     {
-        cout << (int)pData->_tInput._iActualDI[i] << endl;
+       std::cout << (int)pData->_tInput._iActualDI[i] << std::endl;
     }
 }
 
 void OnMonitoringCtrlIOExCB(const LPMONITORING_CTRLIO_EX pData)
 {
     return;
-    cout << "# monitoring ctrl 1 data" << endl;
-    for (int i = 0; i<16; i++)
+   std::cout << "# monitoring ctrl 1 data" << std::endl;
+    for (int i = 0; i < 16; i++)
     {
-        cout << (int)pData->_tInput._iActualDI[i] << endl;
+       std::cout << (int)pData->_tInput._iActualDI[i] << std::endl;
     }
-    for (int i = 0; i<16; i++)
+    for (int i = 0; i < 16; i++)
     {
-        cout << (int)pData->_tOutput._iTargetDO[i] << endl;
+       std::cout << (int)pData->_tOutput._iTargetDO[i] << std::endl;
     }
 }
 
 
 void OnMonitoringStateCB(const ROBOT_STATE eState)
 {
-    // 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í.
+    // 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
     switch ((unsigned char)eState)
     {
-#if 0  // TP ÃÊ±âÈ­½Ã »ç¿ëÇÏ´Â ·ÎÁ÷ÀÓÀ¸·Î API ·¹º§¿¡¼­´Â »ç¿ëÇÏÁö ¸»°Í.(TP¾øÀÌ ´Üµ¶ »ç¿ëÀÏ °æ¿ì, »ç¿ë)
+#if 0  // TP ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ API ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.(TPï¿½ï¿½ï¿½ï¿½ ï¿½Üµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½)
     case STATE_NOT_READY:
         if (g_bHasControlAuthority) Drfl.SetRobotControl(CONTROL_INIT_CONFIG);
         break;
@@ -128,10 +128,10 @@ void OnMonitoringStateCB(const ROBOT_STATE eState)
         }
         break;
     case STATE_SAFE_OFF:
-        //cout << "STATE_SAFE_OFF1" << endl;
+        //cout << "STATE_SAFE_OFF1" << std::endl;
         if (g_bHasControlAuthority) {
-            //cout << "STATE_SAFE_OFF2" << endl;
-            Drfl.SetRobotControl(CONTROL_SERVO_ON);
+            //cout << "STATE_SAFE_OFF2" << std::endl;
+            //Drfl.SetRobotControl(CONTROL_SERVO_ON);
         }
         break;
     case STATE_SAFE_STOP2:
@@ -149,12 +149,12 @@ void OnMonitoringStateCB(const ROBOT_STATE eState)
         break;
     }
     return;
-    cout << "current state: " << (int)eState << endl;
+   std::cout << "current state: " << (int)eState << std::endl;
 }
 
 void OnMonitroingAccessControlCB(const MONITORING_ACCESS_CONTROL eTrasnsitControl)
 {
-    // 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í.
+    // 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 
     switch (eTrasnsitControl)
     {
@@ -164,10 +164,10 @@ void OnMonitroingAccessControlCB(const MONITORING_ACCESS_CONTROL eTrasnsitContro
         break;
     case MONITORING_ACCESS_CONTROL_GRANT:
         g_bHasControlAuthority = TRUE;
-        //cout << "GRANT1" << endl;
-        //cout << "MONITORINGCB : " << (int)Drfl.GetRobotState() << endl;
+        //cout << "GRANT1" << std::endl;
+        //cout << "MONITORINGCB : " << (int)Drfl.GetRobotState() << std::endl;
         OnMonitoringStateCB(Drfl.GetRobotState());
-        //cout << "GRANT2" << endl;
+        //cout << "GRANT2" << std::endl;
         break;
     case MONITORING_ACCESS_CONTROL_DENY:
     case MONITORING_ACCESS_CONTROL_LOSS:
@@ -185,32 +185,32 @@ void OnMonitroingAccessControlCB(const MONITORING_ACCESS_CONTROL eTrasnsitContro
 void OnLogAlarm(LPLOG_ALARM tLog)
 {
     g_mStat = true;
-    cout << "Alarm Info: " << "group(" << (unsigned int)tLog->_iGroup << "), index(" << tLog->_iIndex
-        << "), param(" << tLog->_szParam[0] << "), param(" << tLog->_szParam[1] << "), param(" << tLog->_szParam[2] << ")" << endl;
+   std::cout << "Alarm Info: " << "group(" << (unsigned int)tLog->_iGroup << "), index(" << tLog->_iIndex
+        << "), param(" << tLog->_szParam[0] << "), param(" << tLog->_szParam[1] << "), param(" << tLog->_szParam[2] << ")" << std::endl;
 }
 
 void OnTpPopup(LPMESSAGE_POPUP tPopup)
 {
-    cout << "Popup Message: " << tPopup->_szText << endl;
-    cout << "Message Level: " << tPopup->_iLevel << endl;
-    cout << "Button Type: " << tPopup->_iBtnType << endl;
+   std::cout << "Popup Message: " << tPopup->_szText << std::endl;
+   std::cout << "Message Level: " << tPopup->_iLevel << std::endl;
+   std::cout << "Button Type: " << tPopup->_iBtnType << std::endl;
 }
 
 void OnTpLog(const char* strLog)
 {
-    cout << "Log Message: " << strLog << endl;
+   std::cout << "Log Message: " << strLog << std::endl;
 }
 
 void OnTpProgress(LPMESSAGE_PROGRESS tProgress)
 {
-    cout << "Progress cnt : " << (int)tProgress->_iTotalCount << endl;
-    cout << "Current cnt : " << (int)tProgress->_iCurrentCount << endl;
+   std::cout << "Progress cnt : " << (int)tProgress->_iTotalCount << std::endl;
+   std::cout << "Current cnt : " << (int)tProgress->_iCurrentCount << std::endl;
 }
 
 void OnTpGetuserInput(LPMESSAGE_INPUT tInput)
 {
-    cout << "User Input : " << tInput->_szText << endl;
-    cout << "Data Type : " << (int)tInput->_iType << endl;
+   std::cout << "User Input : " << tInput->_szText << std::endl;
+   std::cout << "Data Type : " << (int)tInput->_iType << std::endl;
 }
 
 void OnRTMonitoringData(LPRT_OUTPUT_DATA_LIST tData)
@@ -231,13 +231,13 @@ void OnRTMonitoringData(LPRT_OUTPUT_DATA_LIST tData)
 void OnMonitoringSafetyStateCB(SAFETY_STATE iState)
 {
     return;
-    cout << iState << endl;
+   std::cout << iState << std::endl;
 }
 
 void OnMonitoringRobotSystemCB(ROBOT_SYSTEM iSystem)
 {
     return;
-    cout << iSystem << endl;
+   std::cout << iSystem << std::endl;
 }
 
 void OnMonitoringSafetyStopTypeCB(const unsigned char iSafetyStopType)
@@ -245,7 +245,7 @@ void OnMonitoringSafetyStopTypeCB(const unsigned char iSafetyStopType)
     return;
 }
 
-DWORD WINAPI ThreadFunc(void *arg)
+DWORD WINAPI ThreadFunc(void* arg)
 {
     while (true) {
         if (_kbhit())
@@ -276,7 +276,7 @@ DWORD WINAPI ThreadFunc(void *arg)
             {
                 while (bAlterFlag) {
                     float pos[6] = { 10,0,0,10,0,0 };
-                    cout << "Alter Flag On !!!!!!" << endl;
+                   std::cout << "Alter Flag On !!!!!!" << std::endl;
                     Drfl.alter_motion(pos);
                 }
             }
@@ -298,43 +298,44 @@ void OnDisConnected()
 
 int main()
 {
-    // ÄÝ¹é µî·Ï(// ÄÝ¹é ÇÔ¼ö ³»¿¡¼­´Â 50msec ÀÌ³» ÀÛ¾÷¸¸ ¼öÇàÇÒ °Í)
-    //Drfl.set_on_homming_completed(OnHommingCompleted);
-    //Drfl.set_on_monitoring_data(OnMonitoringDataCB);
-    //Drfl.set_on_monitoring_data_ex(OnMonitoringDataExCB);
-    //Drfl.set_on_monitoring_ctrl_io(OnMonitoringCtrlIOCB);
-    //Drfl.set_on_monitoring_ctrl_io_ex(OnMonitoringCtrlIOExCB);
-    //Drfl.set_on_monitoring_state(OnMonitoringStateCB);
-    //Drfl.set_on_monitoring_access_control(OnMonitroingAccessControlCB);
-    //Drfl.set_on_tp_initializing_completed(OnTpInitializingCompleted);
-    //Drfl.set_on_log_alarm(OnLogAlarm);
-    //Drfl.set_on_tp_popup(OnTpPopup);
-    //Drfl.set_on_tp_log(OnTpLog);
-    //Drfl.set_on_tp_progress(OnTpProgress);
-    //Drfl.set_on_tp_get_user_input(OnTpGetuserInput);
-    //   Drfl.set_on_rt_monitoring_data(OnRTMonitoringData);
+    // ï¿½Ý¹ï¿½ ï¿½ï¿½ï¿½(// ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 50msec ï¿½Ì³ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+    Drfl.set_on_homming_completed(OnHommingCompleted);
+    Drfl.set_on_monitoring_data(OnMonitoringDataCB);
+    Drfl.set_on_monitoring_data_ex(OnMonitoringDataExCB);
+    Drfl.set_on_monitoring_ctrl_io(OnMonitoringCtrlIOCB);
+    Drfl.set_on_monitoring_ctrl_io_ex(OnMonitoringCtrlIOExCB);
+    Drfl.set_on_monitoring_state(OnMonitoringStateCB);
+    Drfl.set_on_monitoring_access_control(OnMonitroingAccessControlCB);
+    Drfl.set_on_tp_initializing_completed(OnTpInitializingCompleted);
+    Drfl.set_on_log_alarm(OnLogAlarm);
+    Drfl.set_on_tp_popup(OnTpPopup);
+    Drfl.set_on_tp_log(OnTpLog);
+    Drfl.set_on_tp_progress(OnTpProgress);
+    Drfl.set_on_tp_get_user_input(OnTpGetuserInput);
+    Drfl.set_on_rt_monitoring_data(OnRTMonitoringData);
 
-    //Drfl.set_on_monitoring_robot_system(OnMonitoringRobotSystemCB);
+
+   // Drfl.set_on_monitoring_robot_system(OnMonitoringRobotSystemCB);
     //Drfl.set_on_monitoring_safety_state(OnMonitoringSafetyStateCB);
     //Drfl.set_on_monitoring_safety_stop_type(OnMonitoringSafetyStopTypeCB);
 
-    //Drfl.set_on_program_stopped(OnProgramStopped);
-    //Drfl.set_on_disconnected(OnDisConnected);
+    Drfl.set_on_program_stopped(OnProgramStopped);
+    Drfl.set_on_disconnected(OnDisConnected);
 
-    // ¿¬°á ¼ö¸³
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     assert(Drfl.open_connection("192.168.137.100"));
 
-    // ¹öÀü Á¤º¸ È¹µæ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¹ï¿½ï¿½
     SYSTEM_VERSION tSysVerion = { '\0', };
     Drfl.get_system_version(&tSysVerion);
-    // ¸ð´ÏÅÍ¸µ µ¥ÀÌÅÍ ¹öÀü º¯°æ
+    // ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     assert(Drfl.setup_monitoring_version(1));
     Drfl.set_robot_control(CONTROL_SERVO_ON);
     Drfl.set_digital_output(GPIO_CTRLBOX_DIGITAL_INDEX_10, TRUE);
-    cout << "System version: " << tSysVerion._szController << endl;
-    cout << "Library version: " << Drfl.get_library_version() << endl;
+   std::cout << "System version: " << tSysVerion._szController << std::endl;
+   std::cout << "Library version: " << Drfl.get_library_version() << std::endl;
 
-    // ¼öµ¿ ¸ðµå ¼³Á¤
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
     //Drfl.ConfigCreateModbus("mr1", "192.168.137.70", 552, MODBUS_REGISTER_TYPE_HOLDING_REGISTER, 3, 5);
@@ -371,9 +372,9 @@ int main()
         if (ch == '7') ch = '0';
         else if (ch == '0') ch = '7';
 #else
-        cout << "\ninput key : ";
+       std::cout << "\ninput key : ";
         char ch = _getch();
-        cout << ch << endl;
+       std::cout << ch << std::endl;
 #endif    
         switch (ch)
         {
@@ -385,15 +386,15 @@ int main()
             switch ((int)eExample) {
             case EXAMPLE_JOG:
                 assert(Drfl.Jog(JOG_AXIS_JOINT_1, MOVE_REFERENCE_BASE, 0.f));
-                cout << "jog stop" << endl;
+               std::cout << "jog stop" << std::endl;
                 break;
             case EXAMPLE_HOME:
                 assert(Drfl.Home((unsigned char)0));
-                cout << "home stop" << endl;
+               std::cout << "home stop" << std::endl;
                 break;
             case EXAMPLE_MOVEJ_ASYNC:
                 assert(Drfl.MoveStop(STOP_TYPE_SLOW));
-                cout << "movej async stop" << endl;
+               std::cout << "movej async stop" << std::endl;
                 break;
             case EXAMPLE_MOVEL_SYNC:
             case EXAMPLE_MOVEJ_SYNC:
@@ -402,16 +403,16 @@ int main()
                 assert(Drfl.PlayDrlStop(STOP_TYPE_SLOW));
                 //assert(Drfl.SetRobotMode(ROBOT_MODE_MANUAL));
                 //assert(Drfl.SetRobotSystem(ROBOT_SYSTEM_REAL));
-                cout << "drl player stop" << endl;
+               std::cout << "drl player stop" << std::endl;
                 break;
             case EXAMPLE_GPIO:
-                cout << "reset gpio" << endl;
+               std::cout << "reset gpio" << std::endl;
                 for (int i = 0; i < NUM_DIGITAL; i++) {
                     assert(Drfl.SetCtrlBoxDigitalOutput((GPIO_CTRLBOX_DIGITAL_INDEX)i, FALSE));
                 }
                 break;
             case EXAMPLE_MODBUS:
-                cout << "reset modbus" << endl;
+               std::cout << "reset modbus" << std::endl;
                 assert(Drfl.SetModbusValue("mr1", 0));
                 break;
             default:
@@ -428,25 +429,37 @@ int main()
         break;
         case '2':
         {
-            Drfl.set_robot_mode(ROBOT_MODE_MANUAL);
+            ROBOT_TASK_POSE* result = Drfl.get_current_posx();
+            float* pos = new float[NUM_TASK];
+            int sol = result->_iTargetSol;
+            memcpy(pos, result->_fTargetPos, sizeof(float)* NUM_TASK);
+            std::cout << "Position: ";
+            for (int i = 0; i < NUM_TASK; ++i) {
+                std::cout << pos[i] << " ";
+            }
+            std::cout << std::endl;
+            delete[] pos;
+
+            //Drfl.set_robot_mode(ROBOT_MODE_MANUAL);
         }
         break;
         case '3':
         {
-            float pos[6] = { 0, 0, 90, 0, 90, 0 };
-            Drfl.movej(pos, 60, 30);
+            Drfl.servo_off(STOP_TYPE_HOLD);
+            //float pos[6] = { 0, 0, 90, 0, 90, 0 };
+            //Drfl.movej(pos, 60, 30);
         }
         break;
         case '4':
         {
-            cout << "Input Version : " << Drfl.get_rt_control_input_version_list() << endl;
-            cout << "Output Version : " << Drfl.get_rt_control_output_version_list() << endl;
+           std::cout << "Input Version : " << Drfl.get_rt_control_input_version_list() << std::endl;
+           std::cout << "Output Version : " << Drfl.get_rt_control_output_version_list() << std::endl;
         }
         break;
         case '5':
         {
-            cout << "Input Data List : " << Drfl.get_rt_control_input_data_list("v1.0") << endl;
-            cout << "Output Data List : " << Drfl.get_rt_control_output_data_list("v1.0") << endl;
+           std::cout << "Input Data List : " << Drfl.get_rt_control_input_data_list("v1.0") << std::endl;
+           std::cout << "Output Data List : " << Drfl.get_rt_control_output_data_list("v1.0") << std::endl;
         }
 
         break;
@@ -479,7 +492,7 @@ int main()
         {
             Drfl.set_tool("tool2");
             Sleep(1000);
-            cout << Drfl.get_tool() << endl;
+           std::cout << Drfl.get_tool() << std::endl;
         }
         break;
         default:
@@ -492,4 +505,3 @@ int main()
 
     return 0;
 }
-
